@@ -1,0 +1,14 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.vcxproj.user
+
+# Build output
+Debug/
+Release/
+*.exe
+*.obj
+*.o
+*.dll
+*.log
