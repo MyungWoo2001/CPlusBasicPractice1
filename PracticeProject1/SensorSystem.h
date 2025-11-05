@@ -8,34 +8,16 @@ private:
 
 public:
 	// add new Sensor
-	void addSensor(const Sensor& s) {
-		sensors.push_back(s);
-	}
+	void addSensor(const Sensor& s);
 
 	// Update all sensors
-	void updateAll() {
-		for (auto& s: sensors) {
-			s.updateValue();
-		}
-	}
+	void updateAll();
 
 	// Print information of all sensors
-	void printAll() const {
-		std::cout << "==== Sensor Report ====\n";
-		for (const auto& s : sensors) {
-			s.printInfo();
-		}
-		std::cout << "========================\n";
-	}
+	void printAll() const;
 
 	// Sum of all sensors's value
-	double totalValue() const {
-		double sum = 0.0;
-		for (const auto& s : sensors) {
-			sum += s.getValue();
-		}
-		return sum;
-	}
+	double totalValue() const;
 
 
 
