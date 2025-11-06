@@ -16,6 +16,11 @@ public:
 	//Constructor
 	Sensor(int sensorID, double sensorValue, std::string sensorStatus);
 
+	// move constructor
+	Sensor(Sensor&& s) noexcept;
+
+	/*Sensor& operator=(Sensor&& s) noexcept;*/
+
 	// Copy Constructor
 	Sensor(const Sensor& s);
 	// Copy Assignment

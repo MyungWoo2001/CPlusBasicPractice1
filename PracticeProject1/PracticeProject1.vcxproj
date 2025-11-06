@@ -140,11 +140,13 @@
     <ClCompile Include="PracticeProject1.cpp" />
     <ClCompile Include="Sensor.cpp" />
     <ClCompile Include="SensorSystem.cpp" />
+    <ClCompile Include="SensorSystem1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Sensor.h" />
     <ClInclude Include="SensorSystem.h" />
+    <ClInclude Include="SensorSystem1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

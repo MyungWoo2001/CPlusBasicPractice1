@@ -2,26 +2,24 @@
 #include<vector>
 #include"Sensor.h"
 
-class SensorSystem{
+class SensorSystem1 {
 private:
-	std::vector<Sensor> sensors;
+	std::vector<Sensor*> sensors;
 
 public:
 
-	SensorSystem();
-
-	SensorSystem(const std::vector<Sensor>& ss);
-	
-	SensorSystem(SensorSystem&& ss) noexcept;
+	SensorSystem1();
 
 	// copy constructor
-	SensorSystem(const SensorSystem& ss);
-
-	// copy assignment
-	SensorSystem& operator=(const SensorSystem& ss);
+	SensorSystem1(const SensorSystem1&);
+	// operator =
+	SensorSystem1& operator=(const SensorSystem1&);
 
 	// operator +
-	SensorSystem operator+(const SensorSystem& ss);
+	SensorSystem1 operator+(const SensorSystem1&);
+
+	// Destructor
+	~SensorSystem1();
 
 	// add new Sensor
 	void addSensor(const Sensor& s);
@@ -40,5 +38,7 @@ public:
 
 	// Get count of sensors
 	int getcount() const;
+
+	
 
 };

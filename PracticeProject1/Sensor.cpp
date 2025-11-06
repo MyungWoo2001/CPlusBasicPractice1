@@ -15,6 +15,26 @@ Sensor::Sensor(const Sensor& s): id(s.id), value(nullptr), status(s.status) {
 	value = new double(*s.value);
 	std::cout << "Sensor Copy\n";
 }
+
+// coversion Construct
+Sensor::Sensor(Sensor&& s) noexcept
+	: id(s.id), value(s.value), status(std::move(s.status)) {
+	s.value = nullptr;  // r?t quan tr?ng!
+	std::cout << "Sensor Moved\n";
+}
+
+//Sensor& Sensor::operator=(Sensor&& s) noexcept {
+//	if (this != &s) {
+//		delete value;  // Gi?i ph?ng v?ng nh? c?
+//		id = s.id;
+//		value = s.value;
+//		status = std::move(s.status);
+//		s.value = nullptr; // reset ngu?n
+//	}
+//	std::cout << "Move Assignment called for Sensor" << id << std::endl;
+//	return *this;
+//}
+
 // Copy assignment operator 
 Sensor& Sensor::operator=(const Sensor& s) {
 	if (this != &s) {
@@ -56,7 +76,7 @@ void Sensor::updateValue() {
 
 // Operator overload: plus sensor's values
 Sensor Sensor::operator+(const Sensor& other) const {
-	return Sensor(id, *value + *other.value, status);
+	return Sensor(-1, *value + *other.value, status);
 }
 
 void Sensor::printInfo() const {

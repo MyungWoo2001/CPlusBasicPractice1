@@ -5,56 +5,77 @@
 #include <iostream>
 #include "Sensor.h"
 #include "SensorSystem.h"
+#include "SensorSystem1.h"
 
 int main()
 {
-    srand((unsigned int)time(0)); // init seed for rand()
+    Sensor sensor1(1, 1.2, "Ok");
+    Sensor sensor2(2, 1.3, "Ok");
+    Sensor sensor3(3, 1.4, "Ok");
+    Sensor sensor4(4, 1.5, "Ok");
+    
+    SensorSystem1 system1;
+    system1.addSensor(sensor1);
+    system1.addSensor(sensor2);
+    system1.printAllInfo();
 
-    SensorSystem system;
+    SensorSystem1 system2;
+    system2.addSensor(sensor3);
+    system2.addSensor(sensor4);
+    system2.printAllInfo();
 
-    int choice;
-    bool running = true;
+    SensorSystem1 system;
+    system = system1 + system2;
+    system.printAllInfo();
 
-    while (running) {
-        std::cout << "==== Sensor Menu ====" << std::endl;
-        std::cout << "1. Add Sensor \n";
-        std::cout << "2. Remove Sensor \n";
-        std::cout << "3. Sensors list \n";
-        std::cout << "4. Update Sensor value \n";
-        std::cout << "5. Exit \n";
-        std::cout << "Option:";
-        std::cin >> choice;
 
-        switch (choice) {
-        case 1:
-            std::cout << "--- Adding Sensor --- \n";
-            system.addSensor(Sensor(Sensor::count + 1,0.0, "OK"));
-            break;
-        case 2:
-            std::cout << "--- Removing Sensor --- \n";
-            int sid;
-            std::cout << "Enter SensorID:";
-            std::cin >> sid;
-            system.remove(sid);
-            break;
-        case 3:
-            std::cout << "--- Sensor list --- \n";
-            system.printAllInfo();
-            break;
-        case 4:
-            std::cout << "--- Update Sensor --- \n";
-            system.updateAll();
-            break;
-        case 5:
-            std::cout << "--- Exit Program. \n";
-            running = false;
-            break;
-        default:
-            std::cout << "!!! Invalid choice !!!\n";
+    //srand((unsigned int)time(0)); // init seed for rand()
 
-        }
+    //SensorSystem1 system;
 
-    }
+    //int choice;
+    //bool running = true;
+
+    //while (running) {
+    //    std::cout << "==== Sensor Menu ====" << std::endl;
+    //    std::cout << "1. Add Sensor \n";
+    //    std::cout << "2. Remove Sensor \n";
+    //    std::cout << "3. Sensors list \n";
+    //    std::cout << "4. Update Sensor value \n";
+    //    std::cout << "5. Exit \n";
+    //    std::cout << "Option:";
+    //    std::cin >> choice;
+
+    //    switch (choice) {
+    //    case 1:
+    //        std::cout << "--- Adding Sensor --- \n";
+    //        system.addSensor(Sensor(Sensor::count + 1,0.0, "OK"));
+    //        break;
+    //    case 2:
+    //        std::cout << "--- Removing Sensor --- \n";
+    //        int sid;
+    //        std::cout << "Enter SensorID:";
+    //        std::cin >> sid;
+    //        system.remove(sid);
+    //        break;
+    //    case 3:
+    //        std::cout << "--- Sensor list --- \n";
+    //        system.printAllInfo();
+    //        break;
+    //    case 4:
+    //        std::cout << "--- Update Sensor --- \n";
+    //        system.updateAll();
+    //        break;
+    //    case 5:
+    //        std::cout << "--- Exit Program. \n";
+    //        running = false;
+    //        break;
+    //    default:
+    //        std::cout << "!!! Invalid choice !!!\n";
+
+    //    }
+
+    //}
 
     //// Add 5 sensors to system
     //for (int i = 1; i < 6; i++) {

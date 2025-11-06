@@ -1,14 +1,44 @@
 #include "pch.h"
 #include "SensorSystem.h"
 
-//// Destructor
-//SensorSystem::~SensorSystem() {
-//	for (Sensor* s : sensors) {
-//		delete s;
-//	}
-//
-//	std::cout << "[System] All sensors destroyed!\n";
-//}
+
+SensorSystem::SensorSystem() {}
+
+// Conversion Constructor
+SensorSystem::SensorSystem(const std::vector<Sensor>& ss) : sensors(ss) {}
+
+// Move Constructor
+SensorSystem::SensorSystem(SensorSystem&& ss) noexcept {
+	std::cout << "move coverstructor \n";
+	sensors = std::move(ss.sensors);
+}
+
+// copy construtor
+SensorSystem::SensorSystem(const SensorSystem& ss) {
+	std::cout << "copy constructor\n";
+	sensors = ss.sensors;
+}
+
+// copy assignment =
+SensorSystem& SensorSystem::operator=(const SensorSystem& ss) {
+	std::cout << "copy assignment \n";
+	if (this != &ss) {
+		sensors.clear();
+		sensors.insert(sensors.end(), ss.sensors.begin(), ss.sensors.end());
+	}
+
+	return *this;
+}
+
+// operator +
+SensorSystem SensorSystem::operator+(const SensorSystem& ss) {
+	SensorSystem result;
+	result.sensors = sensors;
+	result.sensors.insert(result.sensors.end(), ss.sensors.begin(), ss.sensors.end());
+
+	return result;
+}
+
 
 // add new Sensor
 void SensorSystem::addSensor(const Sensor& s) {
