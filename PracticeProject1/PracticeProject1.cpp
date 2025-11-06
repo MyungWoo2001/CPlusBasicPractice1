@@ -19,25 +19,31 @@ int main()
         std::cout << "==== Sensor Menu ====" << std::endl;
         std::cout << "1. Add Sensor \n";
         std::cout << "2. Remove Sensor \n";
-        std::cout << "3. Update Sensor value \n";
-        std::cout << "4. Print Report \n";
+        std::cout << "3. Sensors list \n";
+        std::cout << "4. Update Sensor value \n";
         std::cout << "5. Exit \n";
+        std::cout << "Option:";
         std::cin >> choice;
 
         switch (choice) {
         case 1:
             std::cout << "--- Adding Sensor --- \n";
-            system.addSensor(Sensor(0.0, "OK"));
-            system.printAll();
+            system.addSensor(Sensor(Sensor::count + 1,0.0, "OK"));
             break;
         case 2:
             std::cout << "--- Removing Sensor --- \n";
+            int sid;
+            std::cout << "Enter SensorID:";
+            std::cin >> sid;
+            system.remove(sid);
             break;
         case 3:
-            std::cout << "--- Update Sensor --- \n";
+            std::cout << "--- Sensor list --- \n";
+            system.printAllInfo();
             break;
         case 4:
-            std::cout << "--- Print Report --- \n";
+            std::cout << "--- Update Sensor --- \n";
+            system.updateAll();
             break;
         case 5:
             std::cout << "--- Exit Program. \n";
