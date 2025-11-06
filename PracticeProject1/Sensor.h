@@ -6,7 +6,7 @@ class Sensor
 {
 private:
 	int id;
-	double value;
+	double *value;
 	std::string status;
 
 public:
@@ -14,7 +14,12 @@ public:
 	static int count;
 
 	//Constructor
-	Sensor(double sensorValue, std::string sensorStatus);
+	Sensor(int sensorID, double sensorValue, std::string sensorStatus);
+
+	// Copy Constructor
+	Sensor(const Sensor& s);
+	// Copy Assignment
+	Sensor& operator=(const Sensor& s);
 
 	// Destructor
 	~Sensor();
