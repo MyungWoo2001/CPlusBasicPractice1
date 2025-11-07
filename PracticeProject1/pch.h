@@ -8,5 +8,13 @@
 #define PCH_H
 
 // 여기에 미리 컴파일하려는 헤더 추가
+#include<string>
+#include"Device.h"
+#include"Sensor.h"
+#include"TSensor.h"
+#include"PSensor.h"
+#include"DSensor.h"
+#include "SensorSystem.h"
+#include "Controller.h"
 
 #endif //PCH_H

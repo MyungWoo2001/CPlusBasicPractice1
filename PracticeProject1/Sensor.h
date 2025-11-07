@@ -2,9 +2,8 @@
 #include<string>
 #include<iostream>
 
-class Sensor
-{
-private:
+class Sensor : public Device {
+protected:
 	int id;
 	double *value;
 	std::string status;
@@ -38,13 +37,11 @@ public:
 	void setValue(double v);
 	void setStatus(const std::string& stt);
 
-	void updateValue();
-
 	//Operator overload: plus sensor values
-	Sensor operator+(const Sensor& other) const;
+	//Sensor operator+(const Sensor& other) const;
 
-	// Print sensor information
-	void printInfo() const;
+	// Virtual
+	virtual void calibrate() = 0;
 
 };
 

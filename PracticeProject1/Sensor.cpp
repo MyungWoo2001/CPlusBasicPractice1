@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Sensor.h"
 
+
 int Sensor::count = 0;
 
 // Constructor
@@ -64,23 +65,7 @@ std::string Sensor::getStatus() const { return status; }
 void Sensor::setValue(double v) { *value = v; }
 void Sensor::setStatus(const std::string& s) { status = s; }
 
-// Update value by random
-void Sensor::updateValue() {
-	double ranvalue = rand() % 1000 / 10.0; // 0.0 -> 99.9
-	*value = ranvalue;
-	// update status following value
-	if (ranvalue < 30) status = "Offline";
-	else if (ranvalue < 60) status = "Warning";
-	else status = "OK";
-}
-
-// Operator overload: plus sensor's values
-Sensor Sensor::operator+(const Sensor& other) const {
-	return Sensor(-1, *value + *other.value, status);
-}
-
-void Sensor::printInfo() const {
-	std::cout << "Sensor ID: " << id
-		<< ", Value: " << *value
-		<< ", Status: " << status << std::endl;
-}
+//// Operator overload: plus sensor's values
+//Sensor Sensor::operator+(const Sensor& other) const {
+//	return Sensor(-1, *value + *other.value, status);
+//}

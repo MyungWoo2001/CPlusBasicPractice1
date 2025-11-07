@@ -1,72 +1,91 @@
 #include "pch.h"
 #include "SensorSystem.h"
 
+// Destructor
+SensorSystem::~SensorSystem() {
+	for (Sensor* s : sensors) {
+		delete s;
+	}
+
+	std::cout << "[System] All sensors destroyed!\n";
+}
 
 SensorSystem::SensorSystem() {}
 
-// Conversion Constructor
-SensorSystem::SensorSystem(const std::vector<Sensor>& ss) : sensors(ss) {}
-
-// Move Constructor
-SensorSystem::SensorSystem(SensorSystem&& ss) noexcept {
-	std::cout << "move coverstructor \n";
-	sensors = std::move(ss.sensors);
-}
-
-// copy construtor
+// copy constructor
 SensorSystem::SensorSystem(const SensorSystem& ss) {
-	std::cout << "copy constructor\n";
 	sensors = ss.sensors;
+	std::cout << "Copy sensors \n";
 }
+//// operator =
+//SensorSystem& SensorSystem::operator=(const SensorSystem1& ss) {
+//	if (this != &ss) {
+//		for (auto it = sensors.begin(); it != sensors.end(); it++) {
+//			delete* it;
+//		}
+//		sensors.clear();
+//		for (auto it = ss.sensors.begin(); it != ss.sensors.end(); it++) {
+//			sensors.push_back(new Sensor(*(*it)));
+//		}
+//	}
+//
+//	return *this;
+//}
 
-// copy assignment =
-SensorSystem& SensorSystem::operator=(const SensorSystem& ss) {
-	std::cout << "copy assignment \n";
-	if (this != &ss) {
-		sensors.clear();
-		sensors.insert(sensors.end(), ss.sensors.begin(), ss.sensors.end());
-	}
+//// operator +
+//SensorSystem SensorSystem::operator+(const SensorSystem1& ss) {
+//	SensorSystem1 result;
+//	// insert this.sensors to result.sensors
+//	for (auto it = this->sensors.begin(); it != this->sensors.end(); it++) {
+//		result.sensors.push_back(new Sensor(*(*it)));
+//	}
+//	// insert ss.sensors to result.sensors
+//	for (auto it = ss.sensors.begin(); it != ss.sensors.end(); it++) {
+//		result.sensors.push_back(new Sensor(*(*it)));
+//	}
+//
+//	return result;
+//}
 
-	return *this;
-}
-
-// operator +
-SensorSystem SensorSystem::operator+(const SensorSystem& ss) {
-	SensorSystem result;
-	result.sensors = sensors;
-	result.sensors.insert(result.sensors.end(), ss.sensors.begin(), ss.sensors.end());
-
-	return result;
-}
 
 
 // add new Sensor
-void SensorSystem::addSensor(const Sensor& s) {
+void SensorSystem::addSensor(Sensor* s) {
 	sensors.push_back(s);
-	s.printInfo();
-}
-// Update all sensors
-void SensorSystem::updateAll() {
-	for (auto& s : sensors) {
-		s.updateValue();
-	}
 }
 
 // Remove one sensor
 void SensorSystem::remove(int id) {
-	for (int i = 0; i < sensors.size(); i++) {
-		if (sensors[i].getID() == id) {
-			sensors.erase(sensors.begin() + i);
+	for (auto it = sensors.begin(); it != sensors.end(); ++it) {
+		if ((*it)->getID() == id) {
+			delete* it;
+			sensors.erase(it);
 			return;
 		}
 	}
+	std::cout << "Sensor with id: " << id << "not found! \n";
 }
+
+// Update all sensors
+void SensorSystem::updateAll() {
+	for (Sensor* s : sensors) {
+		s->updateValue();
+	}
+}
+
+// Calibrate all sensors
+void SensorSystem::calibrateAll() {
+	for (Sensor* s : sensors) {
+		s->calibrate();
+	}
+}
+
 
 // Print information of all sensors
 void SensorSystem::printAllInfo() const {
 	std::cout << "==== Sensor Report ====\n";
-	for (const auto& s : sensors) {
-		s.printInfo();
+	for (Sensor* s : sensors) {
+		s->showInfo();
 	}
 	std::cout << "========================\n";
 }
@@ -74,8 +93,8 @@ void SensorSystem::printAllInfo() const {
 // Sum of all sensors's value
 double SensorSystem::totalValue() const {
 	double sum = 0.0;
-	for (const auto& s : sensors) {
-		sum += s.getValue();
+	for (auto it = sensors.begin(); it != sensors.end(); ++it) {
+		sum += (*it)->getValue();
 	}
 	return sum;
 }
